@@ -1,0 +1,41 @@
+{
+  "name": "police-crime-management-system",
+  "version": "1.0.0",
+  "description": "A comprehensive MERN stack application for police crime records management",
+  "main": "server/server.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm run dev",
+    "build": "cd client && npm run build",
+    "start": "cd server && npm start",
+    "install-server": "cd server && npm install",
+    "install-client": "cd client && npm install",
+    "install-all": "npm run install-server && npm run install-client",
+    "setup": "node setup.js",
+    "seed": "cd server && npm run seed"
+  },
+  "keywords": [
+    "police",
+    "crime-management",
+    "mern-stack",
+    "react",
+    "nodejs",
+    "mongodb",
+    "express",
+    "law-enforcement"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/police-crime-management.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/police-crime-management/issues"
+  },
+  "homepage": "https://github.com/yourusername/police-crime-management#readme",
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
