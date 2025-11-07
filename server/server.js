@@ -24,7 +24,19 @@ app.use('/api/users', userRoutes);
 
 // MongoDB connection
 const connectDB = require('./config/database');
-connectDB();
+const createDefaultAdmin = require('./scripts/auto-create-admin');
+
+connectDB().then(() => {
+  // Auto-create admin user and sample data after database connection
+  setTimeout(async () => {
+    await createDefaultAdmin();
+    // Add a small delay before creating sample data
+    setTimeout(() => {
+      console.log('🌱 Loading sample data...');
+      require('./scripts/auto-sample-data');
+    }, 2000);
+  }, 1000);
+});
 
 // Error handling middleware
 app.use((err, req, res, next) => {

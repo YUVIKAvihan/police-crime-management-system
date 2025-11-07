@@ -1,0 +1,33 @@
+{
+  "folders": [
+    {
+      "name": "🚔 Police Crime Management System",
+      "path": "."
+    },
+    {
+      "name": "📱 Frontend (React)",
+      "path": "./client"
+    },
+    {
+      "name": "🖥️ Backend (Node.js)",
+      "path": "./server"
+    }
+  ],
+  "settings": {
+    "terminal.integrated.cwd": "${workspaceFolder}",
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/dist": true,
+      "**/build": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-vscode.vscode-node-azure-pack",
+      "bradlc.vscode-tailwindcss",
+      "esbenp.prettier-vscode",
+      "ms-vscode.vscode-json",
+      "mongodb.mongodb-vscode"
+    ]
+  }
+}

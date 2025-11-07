@@ -1,6 +1,6 @@
-# 🏛️ Springfield Police Department - Crime Management System
+# 🇮🇳 भारतीय पुलिस विभाग | Indian Police Department - Crime Management System
 
-A comprehensive full-stack web application for law enforcement agencies to manage crime records, criminal profiles, and evidence files. Built with the MERN stack (MongoDB, Express.js, React.js, Node.js).
+A comprehensive full-stack web application for Indian law enforcement agencies to manage crime records, criminal profiles, and evidence files. Built with the MERN stack (MongoDB, Express.js, React.js, Node.js) with bilingual support (Hindi & English).
 
 ![Police System](https://img.shields.io/badge/System-Police%20Department-blue?style=for-the-badge)
 ![MERN Stack](https://img.shields.io/badge/Stack-MERN-green?style=for-the-badge)

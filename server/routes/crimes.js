@@ -11,12 +11,12 @@ const router = express.Router();
 // @access  Private
 router.get('/', auth, async (req, res) => {
   try {
-    const { 
-      page = 1, 
-      limit = 10, 
-      status, 
-      type, 
-      officer, 
+    const {
+      page = 1,
+      limit = 10,
+      status,
+      type,
+      officer,
       search,
       sortBy = 'createdAt',
       sortOrder = 'desc'
@@ -140,6 +140,16 @@ router.post('/', [auth, officerAuth, uploadEvidence.array('evidence', 5)], [
       officerInCharge: req.user._id
     };
 
+    // Parse victims if it's a JSON string (from FormData)
+    if (typeof req.body.victims === 'string') {
+      try {
+        crimeData.victims = JSON.parse(req.body.victims);
+      } catch (error) {
+        console.log('Error parsing victims:', error);
+        crimeData.victims = [];
+      }
+    }
+
     // Handle evidence files
     if (req.files && req.files.length > 0) {
       crimeData.evidence = req.files.map(file => ({
@@ -172,7 +182,7 @@ router.post('/', [auth, officerAuth, uploadEvidence.array('evidence', 5)], [
 router.put('/:id', [auth, officerAuth], async (req, res) => {
   try {
     const crime = await Crime.findById(req.params.id);
-    
+
     if (!crime) {
       return res.status(404).json({ message: 'Crime not found' });
     }
@@ -204,7 +214,7 @@ router.put('/:id', [auth, officerAuth], async (req, res) => {
 router.delete('/:id', [auth, officerAuth], async (req, res) => {
   try {
     const crime = await Crime.findById(req.params.id);
-    
+
     if (!crime) {
       return res.status(404).json({ message: 'Crime not found' });
     }

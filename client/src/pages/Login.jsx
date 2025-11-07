@@ -21,64 +21,81 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    
+
     const result = await login(formData.email, formData.password);
-    
+
     setLoading(false);
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-gray-900">
+      {/* Indian Flag Stripe */}
+      <div className="indian-flag-stripe h-2"></div>
+
       {/* Police Header Banner */}
-      <div className="police-header py-4">
+      <div className="police-header py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <Shield className="h-10 w-10 text-yellow-400" />
+              <div className="police-badge rounded-full p-3">
+                <Shield className="h-12 w-12 text-yellow-400" />
+              </div>
               <div>
-                <h1 className="text-xl font-bold">SPRINGFIELD POLICE DEPARTMENT</h1>
-                <p className="text-sm text-blue-200">Serving and Protecting Since 1885</p>
+                <div className="flex items-center space-x-2">
+                  <span className="text-2xl">🇮🇳</span>
+                  <h1 className="text-2xl font-bold">भारतीय पुलिस विभाग</h1>
+                </div>
+                <h1 className="text-xl font-bold text-yellow-400">INDIAN POLICE DEPARTMENT</h1>
+                <p className="text-sm text-blue-200">सेवा और सुरक्षा | Serving and Protecting the Nation</p>
               </div>
             </div>
-            <div className="text-right">
-              <p className="text-sm text-blue-200">Emergency: 911</p>
-              <p className="text-xs text-blue-300">Non-Emergency: (555) 123-4567</p>
+            <div className="text-right bg-blue-800 bg-opacity-50 rounded-lg p-3 border border-yellow-400">
+              <p className="text-sm font-bold text-yellow-400">आपातकाल | EMERGENCY</p>
+              <p className="text-2xl font-bold text-white">100</p>
+              <p className="text-xs text-blue-200">महिला हेल्पलाइन | Women: 1091</p>
             </div>
           </div>
         </div>
       </div>
-      
+
       <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full">
           {/* Login Card */}
-          <div className="bg-white rounded-lg shadow-2xl p-8 border-t-4 border-blue-600">
+          <div className="bg-white rounded-lg shadow-2xl p-8 border-t-8 border-blue-600 relative overflow-hidden">
+            {/* Indian Flag Corner Accent */}
+            <div className="absolute top-0 right-0 w-20 h-20 indian-flag-stripe opacity-20 rounded-bl-full"></div>
+
             <div className="text-center mb-8">
               <div className="flex justify-center mb-4">
-                <div className="bg-blue-100 p-3 rounded-full">
-                  <Shield className="h-12 w-12 text-blue-600" />
+                <div className="police-badge p-4 rounded-full shadow-lg">
+                  <Shield className="h-16 w-16 text-yellow-400" />
                 </div>
               </div>
+              <div className="text-4xl mb-2">🇮🇳</div>
               <h2 className="text-2xl font-bold text-gray-900">
-                SECURE ACCESS PORTAL
+                सुरक्षित प्रवेश पोर्टल
               </h2>
+              <p className="mt-1 text-xl font-bold text-blue-900">
+                SECURE ACCESS PORTAL
+              </p>
               <p className="mt-2 text-lg font-semibold text-blue-800">
                 Crime Records Management System
               </p>
               <div className="mt-3 bg-red-50 border border-red-200 rounded-md p-2">
                 <p className="text-sm font-medium text-red-800">
-                  🔒 AUTHORIZED PERSONNEL ONLY
+                  🔒 केवल अधिकृत कर्मियों के लिए | AUTHORIZED PERSONNEL ONLY
                 </p>
                 <p className="text-xs text-red-600">
-                  Unauthorized access is prohibited and monitored
+                  अनधिकृत पहुंच निषिद्ध है | Unauthorized access prohibited
                 </p>
               </div>
             </div>
-        
+
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="space-y-4">
                 <div>
                   <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
-                    👤 OFFICER EMAIL ADDRESS
+                    👤 अधिकारी ईमेल | OFFICER EMAIL ADDRESS
                   </label>
                   <input
                     id="email"
@@ -91,10 +108,10 @@ const Login = () => {
                     onChange={handleChange}
                   />
                 </div>
-                
+
                 <div>
                   <label htmlFor="password" className="block text-sm font-semibold text-gray-700 mb-2">
-                    🔐 SECURE PASSWORD
+                    🔐 सुरक्षित पासवर्ड | SECURE PASSWORD
                   </label>
                   <div className="relative">
                     <input
@@ -126,12 +143,12 @@ const Login = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full btn-primary py-3 text-lg font-bold uppercase tracking-wide"
+                  className="w-full bg-gradient-to-r from-blue-700 via-blue-800 to-blue-900 hover:from-blue-800 hover:via-blue-900 hover:to-blue-950 text-white py-3 text-lg font-bold uppercase tracking-wide rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
                 >
-                  {loading ? '🔄 AUTHENTICATING...' : '🔓 SECURE LOGIN'}
+                  {loading ? '🔄 प्रमाणीकरण | AUTHENTICATING...' : '🔓 सुरक्षित लॉगिन | SECURE LOGIN'}
                 </button>
               </div>
-              
+
               <div className="text-center">
                 <div className="bg-yellow-50 border-2 border-yellow-400 rounded-md p-4 mb-4">
                   <p className="text-sm font-bold text-yellow-800 mb-2">⚠️ DEMO SYSTEM CREDENTIALS</p>
@@ -144,7 +161,7 @@ const Login = () => {
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="bg-gray-100 rounded-md p-3">
                   <p className="text-xs text-gray-600 font-medium">
                     © 2024 Springfield Police Department

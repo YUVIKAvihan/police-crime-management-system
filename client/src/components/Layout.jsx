@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { 
-  Home, 
-  FileText, 
-  Users, 
-  User, 
-  LogOut, 
-  Menu, 
+import {
+  Home,
+  FileText,
+  Users,
+  User,
+  LogOut,
+  Menu,
   X,
   Shield,
   Plus
@@ -58,11 +58,10 @@ const Layout = () => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`group flex items-center px-3 py-3 text-sm font-semibold rounded-md transition-all duration-200 ${
-                    isActive(item.href)
-                      ? 'bg-blue-600 text-white shadow-lg'
-                      : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                  }`}
+                  className={`group flex items-center px-3 py-3 text-sm font-semibold rounded-md transition-all duration-200 ${isActive(item.href)
+                    ? 'bg-blue-600 text-white shadow-lg'
+                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                    }`}
                   onClick={() => setSidebarOpen(false)}
                 >
                   <Icon className="mr-3 h-5 w-5" />
@@ -77,11 +76,20 @@ const Layout = () => {
       {/* Desktop sidebar */}
       <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
         <div className="flex flex-col flex-grow police-sidebar">
-          <div className="flex items-center h-16 px-4 border-b border-gray-700">
-            <Shield className="h-8 w-8 text-yellow-400" />
+          {/* Indian Flag Stripe */}
+          <div className="indian-flag-stripe h-1"></div>
+
+          <div className="flex items-center h-20 px-4 border-b border-yellow-400 bg-blue-900">
+            <div className="police-badge rounded-full p-2">
+              <Shield className="h-8 w-8 text-yellow-400" />
+            </div>
             <div className="ml-2">
-              <span className="text-lg font-bold text-white">SPD PORTAL</span>
-              <div className="text-xs text-gray-300">Crime Records System</div>
+              <div className="flex items-center space-x-1">
+                <span className="text-lg">🇮🇳</span>
+                <span className="text-sm font-bold text-white">IPD</span>
+              </div>
+              <div className="text-xs text-yellow-400 font-semibold">पुलिस पोर्टल</div>
+              <div className="text-xs text-gray-300">Police Portal</div>
             </div>
           </div>
           <nav className="flex-1 space-y-2 px-3 py-6">
@@ -91,11 +99,10 @@ const Layout = () => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`group flex items-center px-3 py-3 text-sm font-semibold rounded-md transition-all duration-200 ${
-                    isActive(item.href)
-                      ? 'bg-blue-600 text-white shadow-lg'
-                      : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                  }`}
+                  className={`group flex items-center px-3 py-3 text-sm font-semibold rounded-md transition-all duration-200 ${isActive(item.href)
+                    ? 'bg-blue-600 text-white shadow-lg'
+                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                    }`}
                 >
                   <Icon className="mr-3 h-5 w-5" />
                   {item.name}
@@ -117,7 +124,7 @@ const Layout = () => {
             >
               <Menu className="h-6 w-6" />
             </button>
-            
+
             <div className="flex items-center space-x-4">
               <div className="text-right">
                 <div className="text-sm text-white">
@@ -159,7 +166,7 @@ const Layout = () => {
           <Plus className="h-6 w-6" />
         </Link>
       )}
-      
+
       {/* Police Footer */}
       <footer className="bg-gray-800 text-white py-4 mt-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -167,13 +174,13 @@ const Layout = () => {
             <div className="flex items-center space-x-4">
               <Shield className="h-6 w-6 text-yellow-400" />
               <div>
-                <p className="text-sm font-semibold">Springfield Police Department</p>
+                <p className="text-sm font-semibold">भारतीय पुलिस विभाग | Indian Police Department</p>
                 <p className="text-xs text-gray-400">Crime Records Management System v2.0</p>
               </div>
             </div>
             <div className="text-right">
-              <p className="text-xs text-gray-400">Emergency: 911 | Non-Emergency: (555) 123-4567</p>
-              <p className="text-xs text-gray-500">© 2024 SPD. All rights reserved.</p>
+              <p className="text-xs text-gray-400">आपातकाल: 100 | Emergency: 100 | Women Helpline: 1091</p>
+              <p className="text-xs text-gray-500">© 2024 IPD. सर्वाधिकार सुरक्षित | All rights reserved.</p>
             </div>
           </div>
         </div>

@@ -1,0 +1,19 @@
+🚀 GITHUB UPLOAD COMMANDS
+========================
+
+After creating your repository on GitHub, run these commands:
+
+1. Add GitHub repository as remote:
+git remote add origin https://github.com/YOURUSERNAME/police-crime-management-system.git
+
+2. Set main branch:
+git branch -M main
+
+3. Push to GitHub:
+git push -u origin main
+
+Replace YOURUSERNAME with your actual GitHub username!
+
+Example:
+If your username is "johnsmith", the command would be:
+git remote add origin https://github.com/johnsmith/police-crime-management-system.git

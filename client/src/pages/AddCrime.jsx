@@ -15,32 +15,47 @@ const AddCrime = () => {
   const onSubmit = async (data) => {
     try {
       setLoading(true);
-      
-      const formData = new FormData();
-      
-      // Add form fields
-      Object.keys(data).forEach(key => {
-        if (key.startsWith('location.')) {
-          const locationKey = key.split('.')[1];
-          formData.append(`location[${locationKey}]`, data[key]);
-        } else {
-          formData.append(key, data[key]);
-        }
-      });
-      
-      // Add victims
-      formData.append('victims', JSON.stringify(victims.filter(v => v.name.trim())));
-      
-      // Add evidence files
-      evidenceFiles.forEach(file => {
-        formData.append('evidence', file);
-      });
 
-      const response = await axios.post('/api/crimes', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
+      // If there are evidence files, use FormData
+      if (evidenceFiles.length > 0) {
+        const formData = new FormData();
+
+        // Add form fields
+        Object.keys(data).forEach(key => {
+          if (key.startsWith('location.')) {
+            const locationKey = key.split('.')[1];
+            formData.append(`location[${locationKey}]`, data[key]);
+          } else {
+            formData.append(key, data[key]);
+          }
+        });
+
+        // Add victims
+        formData.append('victims', JSON.stringify(victims.filter(v => v.name.trim())));
+
+        // Add evidence files
+        evidenceFiles.forEach(file => {
+          formData.append('evidence', file);
+        });
+
+        const response = await axios.post('/api/crimes', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+      } else {
+        // If no files, send as JSON
+        const crimeData = {
+          ...data,
+          victims: victims.filter(v => v.name.trim())
+        };
+
+        const response = await axios.post('/api/crimes', crimeData, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+      }
 
       toast.success('Crime record created successfully!');
       navigate('/crimes');
@@ -72,7 +87,7 @@ const AddCrime = () => {
   };
 
   const updateVictim = (index, field, value) => {
-    setVictims(prev => prev.map((victim, i) => 
+    setVictims(prev => prev.map((victim, i) =>
       i === index ? { ...victim, [field]: value } : victim
     ));
   };
@@ -94,7 +109,7 @@ const AddCrime = () => {
         {/* Basic Information */}
         <div className="card">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Basic Information</h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -109,7 +124,7 @@ const AddCrime = () => {
                 <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>
               )}
             </div>
-            
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Crime Type *
@@ -134,7 +149,7 @@ const AddCrime = () => {
                 <p className="text-red-500 text-sm mt-1">{errors.type.message}</p>
               )}
             </div>
-            
+
             <div className="md:col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Description *
@@ -148,7 +163,7 @@ const AddCrime = () => {
                 <p className="text-red-500 text-sm mt-1">{errors.description.message}</p>
               )}
             </div>
-            
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Date of Crime *
@@ -162,7 +177,7 @@ const AddCrime = () => {
                 <p className="text-red-500 text-sm mt-1">{errors.date.message}</p>
               )}
             </div>
-            
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Priority
@@ -183,7 +198,7 @@ const AddCrime = () => {
         {/* Location Information */}
         <div className="card">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Location Information</h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="md:col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -198,7 +213,7 @@ const AddCrime = () => {
                 <p className="text-red-500 text-sm mt-1">{errors.location.address.message}</p>
               )}
             </div>
-            
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 City *
@@ -212,7 +227,7 @@ const AddCrime = () => {
                 <p className="text-red-500 text-sm mt-1">{errors.location.city.message}</p>
               )}
             </div>
-            
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 State *
@@ -241,7 +256,7 @@ const AddCrime = () => {
               Add Victim
             </button>
           </div>
-          
+
           {victims.map((victim, index) => (
             <div key={index} className="border border-gray-200 rounded-lg p-4 mb-4">
               <div className="flex justify-between items-center mb-3">
@@ -256,7 +271,7 @@ const AddCrime = () => {
                   </button>
                 )}
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -269,7 +284,7 @@ const AddCrime = () => {
                     onChange={(e) => updateVictim(index, 'name', e.target.value)}
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Age
@@ -281,7 +296,7 @@ const AddCrime = () => {
                     onChange={(e) => updateVictim(index, 'age', e.target.value)}
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Gender
@@ -297,7 +312,7 @@ const AddCrime = () => {
                     <option value="other">Other</option>
                   </select>
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Contact
@@ -309,7 +324,7 @@ const AddCrime = () => {
                     onChange={(e) => updateVictim(index, 'contact', e.target.value)}
                   />
                 </div>
-                
+
                 <div className="md:col-span-2">
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Address
@@ -329,7 +344,7 @@ const AddCrime = () => {
         {/* Evidence Files */}
         <div className="card">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Evidence Files</h2>
-          
+
           <div className="border-2 border-dashed border-gray-300 rounded-lg p-6">
             <div className="text-center">
               <Upload className="mx-auto h-12 w-12 text-gray-400" />
@@ -353,7 +368,7 @@ const AddCrime = () => {
               </div>
             </div>
           </div>
-          
+
           {evidenceFiles.length > 0 && (
             <div className="mt-4">
               <h3 className="text-sm font-medium text-gray-900 mb-2">Selected Files:</h3>
